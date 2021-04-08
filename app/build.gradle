@@ -1,0 +1,51 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+    dependencies {
+        classpath fileTree(dir: './../betapublish/build/libs/betapublish.jar')
+    }
+}
+
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        release {
+            storeFile file('./../app.jks')
+            storePassword 'hacknife'
+            keyAlias 'hacknife'
+            keyPassword 'hacknife'
+        }
+    }
+
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "com.hacknife.betapublish"
+        minSdkVersion 19
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        signingConfig signingConfigs.release
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+}
+
+
+apply plugin: 'com.hacknife.betapublish'
+
+beta {
+    apiKey = '9be8e7b8347f764cec05b3aeb6838635'
+    file = 'app/build/outputs/apk/release/app-release.apk'
+    installType = "2"
+    password = "123456"
+    updateDescription = 'test update ....'
+}
