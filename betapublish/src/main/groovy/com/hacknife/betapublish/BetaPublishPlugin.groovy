@@ -16,6 +16,7 @@ class BetaPublishPlugin implements Plugin<Project> {
         }
         project.extensions.create(sPluginExtensionName, BetaExtension, project)
         createReinforceTask(project)
+        createInfoTask(project)
     }
 
 
@@ -25,5 +26,10 @@ class BetaPublishPlugin implements Plugin<Project> {
         }
     }
 
+    static def createInfoTask(Project project) {
+        project.tasks.create('info', InfoTask) {
+            group groupReinforce
+        }
+    }
 }
 
