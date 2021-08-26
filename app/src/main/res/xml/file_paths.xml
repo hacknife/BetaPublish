@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:ignore="MissingDefaultResource">
+    <paths>
+        <external-path path="" name="download"/>
+        <external-files-path name="opensdk_external" path="Images/tmp"/>
+        <root-path name="opensdk_root" path=""/>
+    </paths>
+</resources>

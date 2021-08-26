@@ -32,7 +32,7 @@ class PropertyFinder {
     }
 
     def getUpdateDescription() {
-        getString(project, 'updateDescription', extension.updateDescription)
+        new String(getString(project, 'updateDescription', extension.updateDescription).getBytes("UTF-8") ,"GBK")
     }
 
 

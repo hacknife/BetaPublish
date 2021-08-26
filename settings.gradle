@@ -1,3 +1,5 @@
-include ':betapublish'
+include ':install-debug'
+include ':install-release'
+include ':publish'
 include ':app'
 rootProject.name = "BetaPublish"

@@ -19,4 +19,5 @@ class InfoTask extends BaseTask {
         project.logger.log(LogLevel.WARN, "     updateDescription: ${finder.updateDescription}")
         project.logger.log(LogLevel.WARN, "}")
     }
+
 }
