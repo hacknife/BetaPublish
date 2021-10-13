@@ -33,8 +33,8 @@ class Install {
 
         fun install() {
             GlobalScope.launch(Dispatchers.IO) {
-                val data = HttpClient.check()
-                if (data?.buildHaveNewVersion == false) return@launch
+                val data = HttpClient.check() ?: return@launch
+                if (!data.buildHaveNewVersion) return@launch
                 GlobalScope.launch(Dispatchers.Main) {
                     TipDialog(Pgyer.pgyer.context!!)
                             .setTitleRes(R.string.pyger_update)
