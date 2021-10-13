@@ -10,7 +10,7 @@ import com.hacknife.install.debug.R
 
 abstract class BaseDialog (context: Context) : Dialog(
     context,
-    R.style.common_dialog_transparent_shadowed
+    R.style.install_dialog
 ) {
 
 
@@ -28,6 +28,7 @@ abstract class BaseDialog (context: Context) : Dialog(
     open fun destroy(){}
     override fun show() {
         super.show()
+        window!!.setBackgroundDrawableResource(R.drawable.base_dialog_bg)
         window!!.setGravity(Gravity.CENTER)
         window!!.decorView.setPadding(0, 0, 0, 0)
         window!!.attributes = window!!.attributes.let {

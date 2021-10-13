@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.*
+import java.lang.Exception
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -22,17 +23,21 @@ import java.net.URL
 class HttpClient {
     companion object {
         fun check(): Version? {
-            val url = "https://www.pgyer.com/apiv2/app/check?_api_key=${pgyer._api_key}&appKey=${pgyer.appKey}&buildVersion=${pgyer.versionName}"
-            val connection = URL(url).openConnection() as HttpURLConnection
-            connection.connectTimeout = 3 * 60 * 1000
-            connection.readTimeout = 3 * 60 * 1000
-            connection.requestMethod = "POST"
-            if (connection.responseCode == HttpURLConnection.HTTP_OK) {
-                val inStream = connection.inputStream
-                val bytes = read(inStream)
-                val jsonStr = String(bytes)
-                val json = Gson().fromJson(jsonStr, Response::class.java)
-                return json?.data
+            try {
+                val url = "https://www.pgyer.com/apiv2/app/check?_api_key=${pgyer._api_key}&appKey=${pgyer.appKey}&buildVersion=${pgyer.versionName}"
+                val connection = URL(url).openConnection() as HttpURLConnection
+                connection.connectTimeout = 3 * 60 * 1000
+                connection.readTimeout = 3 * 60 * 1000
+                connection.requestMethod = "POST"
+                if (connection.responseCode == HttpURLConnection.HTTP_OK) {
+                    val inStream = connection.inputStream
+                    val bytes = read(inStream)
+                    val jsonStr = String(bytes)
+                    val json = Gson().fromJson(jsonStr, Response::class.java)
+                    return json?.data
+                }
+            } catch (e: Exception) {
+                return null
             }
             return null
         }
