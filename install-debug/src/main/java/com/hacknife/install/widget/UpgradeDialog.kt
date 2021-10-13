@@ -62,7 +62,7 @@ class UpgradeDialog(context: Context, private val link: String, private val name
             }, {
                 findViewById<View>(R.id.tvConfirm).isEnabled = false
                 findViewById<TextView>(R.id.tvConfirm).visibility = View.GONE
-                findViewById<TextView>(R.id.tvTitle).setText(R.string.download_fail)
+                findViewById<TextView>(R.id.tvTitle).setText(R.string.pyger_download_fail)
             })
         }
 
