@@ -1,4 +1,4 @@
-package com.hacknife.install.widget
+package com.iwdael.install.widget
 
 import android.content.Context
 import android.graphics.Color
@@ -7,8 +7,8 @@ import android.widget.TextView
 
 import com.hacknife.coolprogress.LineProgressBar
 import com.hacknife.install.debug.R
-import com.hacknife.install.http.HttpClient
-import com.hacknife.install.widget.base.BaseDialog
+import com.iwdael.install.http.HttpClient
+import com.iwdael.install.widget.base.BaseDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

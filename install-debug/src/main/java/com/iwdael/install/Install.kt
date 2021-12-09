@@ -1,13 +1,13 @@
-package com.hacknife.install
+package com.iwdael.install
 
 import android.content.Context
 import android.content.Intent
 import androidx.core.content.FileProvider
 import com.google.gson.Gson
 import com.hacknife.install.debug.R
-import com.hacknife.install.http.HttpClient
-import com.hacknife.install.widget.TipDialog
-import com.hacknife.install.widget.UpgradeDialog
+import com.iwdael.install.http.HttpClient
+import com.iwdael.install.widget.TipDialog
+import com.iwdael.install.widget.UpgradeDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

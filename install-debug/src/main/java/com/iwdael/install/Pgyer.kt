@@ -1,4 +1,4 @@
-package com.hacknife.install
+package com.iwdael.install
 
 import android.content.Context
 

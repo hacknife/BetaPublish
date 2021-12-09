@@ -1,4 +1,4 @@
-package com.hacknife.betapublish
+package com.iwdael.betapublish
 
 class DataPgyer {
     String buildKey

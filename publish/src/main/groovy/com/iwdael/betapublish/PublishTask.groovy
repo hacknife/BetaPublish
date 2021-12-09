@@ -1,11 +1,9 @@
-package com.hacknife.betapublish
+package com.iwdael.betapublish
 
 import groovy.json.JsonOutput
 import org.gradle.api.logging.LogLevel
 import org.gradle.api.tasks.TaskAction
-
-class InfoTask extends BaseTask {
-
+class PublishTask extends BaseTask {
     @TaskAction
     void run() throws Exception {
         BetaExtension extension = project.getExtensions().findByType(BetaExtension.class);
@@ -18,6 +16,16 @@ class InfoTask extends BaseTask {
         project.logger.log(LogLevel.WARN, "     password: ${finder.password}")
         project.logger.log(LogLevel.WARN, "     updateDescription: ${finder.updateDescription}")
         project.logger.log(LogLevel.WARN, "}")
-    }
 
+        Map<String, String> map = new HashMap<>()
+        map.put("_api_key", finder.apiKey)
+        map.put("buildInstallType", finder.installType)
+        map.put("buildPassword", finder.password)
+        map.put("buildUpdateDescription", finder.updateDescription)
+        upload(map, finder.file, { project.logger.warn(it) }, {
+            project.logger.log(LogLevel.WARN, "")
+            project.logger.log(LogLevel.WARN, JsonOutput.prettyPrint(it))
+        })
+
+    }
 }

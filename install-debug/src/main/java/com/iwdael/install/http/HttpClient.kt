@@ -1,16 +1,14 @@
-package com.hacknife.install.http
+package com.iwdael.install.http
 
 import com.google.gson.Gson
-import com.hacknife.install.Install
-import com.hacknife.install.Pgyer
-import com.hacknife.install.Pgyer.Companion.pgyer
+import com.iwdael.install.Pgyer.Companion.pgyer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.*
-import java.lang.Exception
 import java.net.HttpURLConnection
 import java.net.URL
+import kotlin.Exception
 
 /**
  * author : 段泽全(hacknife)
@@ -53,35 +51,40 @@ class HttpClient {
             return outStream.toByteArray()
         }
 
-        fun download(url: String, fileName: String, progress: ((Float) -> Unit), complete: ((File) -> Unit), error: ((File) -> Unit)) {
-            val connection = URL(url).openConnection() as HttpURLConnection
-            connection.connectTimeout = 3 * 60 * 1000
-            connection.readTimeout = 3 * 60 * 1000
-            connection.requestMethod = "POST"
-            val file = File(pgyer.context!!.cacheDir, fileName)
-            file.deleteOnExit()
-            val outputStream: OutputStream = FileOutputStream(file)
-            if (connection.responseCode == HttpURLConnection.HTTP_OK) {
-                val inputStream = connection.inputStream
-                val contentLength = connection.contentLength * 1f
-                val fileReader = ByteArray(1024)
-                var currentLength = 0
-                while (true) {
-                    val read = inputStream.read(fileReader)
-                    if (read == -1) break
-                    currentLength += read
-                    outputStream.write(fileReader, 0, read)
-                    GlobalScope.launch(Dispatchers.Main) {
-                        progress.invoke(100 * currentLength / contentLength)
+        fun download(url: String, fileName: String, progress: ((Float) -> Unit), complete: ((File) -> Unit), error: (() -> Unit)) {
+            try {
+                val connection = URL(url).openConnection() as HttpURLConnection
+                connection.connectTimeout = 3 * 60 * 1000
+                connection.readTimeout = 3 * 60 * 1000
+                connection.requestMethod = "POST"
+                val file = File(pgyer.context!!.cacheDir, fileName)
+                file.deleteOnExit()
+                val outputStream: OutputStream = FileOutputStream(file)
+                if (connection.responseCode == HttpURLConnection.HTTP_OK) {
+                    val inputStream = connection.inputStream
+                    val contentLength = connection.contentLength * 1f
+                    val fileReader = ByteArray(1024)
+                    var currentLength = 0
+                    while (true) {
+                        val read = inputStream.read(fileReader)
+                        if (read == -1) break
+                        currentLength += read
+                        outputStream.write(fileReader, 0, read)
+                        GlobalScope.launch(Dispatchers.Main) {
+                            progress.invoke(100 * currentLength / contentLength)
+                        }
                     }
+                    outputStream.flush()
+                    inputStream.close()
+                    outputStream.close()
                 }
-                outputStream.flush()
-                inputStream.close()
-                outputStream.close()
+                GlobalScope.launch(Dispatchers.Main) {
+                    complete.invoke(file)
+                }
+            } catch (e: Exception) {
+                error.invoke()
             }
-            GlobalScope.launch(Dispatchers.Main) {
-                complete.invoke(file)
-            }
+
         }
     }
 }

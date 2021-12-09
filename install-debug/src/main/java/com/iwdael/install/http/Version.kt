@@ -1,4 +1,4 @@
-package com.hacknife.install.http
+package com.iwdael.install.http
 
 class Version {
     var buildBuildVersion: String? = null

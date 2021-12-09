@@ -1,8 +1,9 @@
-package com.hacknife.betapublish
+package com.iwdael.betapublish
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.hacknife.install.Install
+import com.hacknife.betapublish.R
+import com.iwdael.install.Install
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

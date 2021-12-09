@@ -1,4 +1,4 @@
-package com.hacknife.betapublish
+package com.iwdael.betapublish
 
 import org.gradle.api.DefaultTask
 import org.gradle.internal.impldep.com.google.gson.Gson

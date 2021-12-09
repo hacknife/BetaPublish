@@ -1,4 +1,4 @@
-package com.hacknife.betapublish
+package com.iwdael.betapublish
 
 
 import org.gradle.api.Plugin

@@ -1,4 +1,4 @@
-package com.hacknife.install.widget.base
+package com.iwdael.install.widget.base
 
 import android.app.Dialog
 import android.content.Context

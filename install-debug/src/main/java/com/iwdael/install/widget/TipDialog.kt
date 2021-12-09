@@ -1,10 +1,10 @@
-package com.hacknife.install.widget
+package com.iwdael.install.widget
 
 import android.content.Context
 import android.view.View
 import android.widget.TextView
 import com.hacknife.install.debug.R
-import com.hacknife.install.widget.base.BaseDialog
+import com.iwdael.install.widget.base.BaseDialog
 
 
 /**
