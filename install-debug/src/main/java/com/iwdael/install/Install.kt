@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.content.FileProvider
 import com.google.gson.Gson
-import com.hacknife.install.debug.R
+import com.iwdael.install.debug.R
 import com.iwdael.install.http.HttpClient
 import com.iwdael.install.widget.TipDialog
 import com.iwdael.install.widget.UpgradeDialog
@@ -14,8 +14,8 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 /**
- * author : 段泽全(hacknife)
- * e-mail : hacknife@outlook.com
+ * author : Iwdael
+ * e-mail : iwdael@outlook.com
  * time   : 2019/8/5
  * desc   : MVVM
  * version: 1.0

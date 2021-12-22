@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.TextView
 
 import com.hacknife.coolprogress.LineProgressBar
-import com.hacknife.install.debug.R
+import com.iwdael.install.debug.R
 import com.iwdael.install.http.HttpClient
 import com.iwdael.install.widget.base.BaseDialog
 import kotlinx.coroutines.Dispatchers
@@ -18,8 +18,8 @@ import java.io.OutputStream
 import java.util.concurrent.TimeUnit
 
 /**
- * author : 段泽全(hacknife)
- * e-mail : hacknife@outlook.com
+ * author : Iwdael
+ * e-mail : iwdael@outlook.com
  * time   : 2019/8/5
  * desc   : MVVM
  * version: 1.0

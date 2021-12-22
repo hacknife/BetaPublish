@@ -21,6 +21,10 @@ android {
         versionName buidConfig.versionName
         signingConfig signingConfigs.release
     }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 dependencies {

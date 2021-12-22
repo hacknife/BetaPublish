@@ -3,13 +3,13 @@ package com.iwdael.install.widget
 import android.content.Context
 import android.view.View
 import android.widget.TextView
-import com.hacknife.install.debug.R
+import com.iwdael.install.debug.R
 import com.iwdael.install.widget.base.BaseDialog
 
 
 /**
- * author : 段泽全(hacknife)
- * e-mail : hacknife@outlook.com
+ * author : Iwdael
+ * e-mail : iwdael@outlook.com
  * time   : 2019/8/5
  * desc   : MVVM
  * version: 1.0

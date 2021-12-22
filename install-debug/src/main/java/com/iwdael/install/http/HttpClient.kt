@@ -11,8 +11,8 @@ import java.net.URL
 import kotlin.Exception
 
 /**
- * author : 段泽全(hacknife)
- * e-mail : hacknife@outlook.com
+ * author : Iwdael
+ * e-mail : iwdael@outlook.com
  * time   : 2019/8/5
  * desc   : MVVM
  * version: 1.0

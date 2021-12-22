@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.WindowManager
 import android.widget.Toast
-import com.hacknife.install.debug.R
+import com.iwdael.install.debug.R
 
 abstract class BaseDialog (context: Context) : Dialog(
     context,
