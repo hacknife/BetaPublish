@@ -15,7 +15,7 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath 'com.iwdael.betapublish:publish:0.1.1'
+        classpath 'com.iwdael.betapublish:publish:$version'
     }
 }
 ```
@@ -53,8 +53,8 @@ allprojects {
 配置App Module下build.gradle
 ```
 dependencies {
-    debugImplementation com.iwdael.betapublish:install-debug:0.1.1
-    releaseImplementation com.iwdael.betapublish:install-release:0.1.1
+    debugImplementation com.iwdael.betapublish:install-debug:$version
+    releaseImplementation com.iwdael.betapublish:install-release:$version
 }
 ```
 初始化
