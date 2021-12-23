@@ -15,6 +15,6 @@ ext {
             'kotlinxCoroutinesCore'   : 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1',
             'kotlinxCoroutinesAndroid': 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1',
             'gson'                    : 'com.google.code.gson:gson:2.6.2',
-            'coolprogress'            : 'com.hacknife:coolprogress:1.1.3',
+            'coolprogress'            : 'com.github.iwdael:coolprogress:1.3.0',
     ]
 }

@@ -5,7 +5,7 @@ import android.graphics.Color
 import android.view.View
 import android.widget.TextView
 
-import com.hacknife.coolprogress.LineProgressBar
+import com.iwdael.coolprogress.LineProgressBar
 import com.iwdael.install.debug.R
 import com.iwdael.install.http.HttpClient
 import com.iwdael.install.widget.base.BaseDialog

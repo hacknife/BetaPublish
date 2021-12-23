@@ -45,7 +45,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <com.hacknife.coolprogress.LineProgressBar
+            <com.iwdael.coolprogress.LineProgressBar
                 android:id="@+id/lineProgress"
                 android:layout_width="0dp"
                 android:layout_height="12dp"
