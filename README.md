@@ -31,11 +31,11 @@ beta {
     updateDescription = 'xxxx'
 }
 ```
-### 查看配置信息:
+查看配置信息:
 ```
 Gradle -> 项目名 -> App module name -> Tasks -> betapublish -> info
 ```
-### 发布:
+发布:
 ```
 Gradle -> 项目名 -> App module name -> Tasks -> betapublish -> publish pgyer
 ```
