@@ -1,7 +1,7 @@
 package com.iwdael.install.http
 
-class Response {
+class Response<T> {
     var code = 0
     var message: String? = null
-    var data: Version? = null
+    var data: T? = null
 }

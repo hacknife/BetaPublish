@@ -6,6 +6,7 @@ import androidx.core.content.FileProvider
 import com.google.gson.Gson
 import com.iwdael.install.debug.R
 import com.iwdael.install.http.HttpClient
+import com.iwdael.install.widget.HistoryDialog
 import com.iwdael.install.widget.TipDialog
 import com.iwdael.install.widget.UpgradeDialog
 import kotlinx.coroutines.Dispatchers
@@ -24,34 +25,41 @@ class Install {
 
     companion object {
 
-        fun init(context: Context, _api_key: String, appKey: String, versionName: String) {
-            Pgyer.pgyer.context = context
+        fun init(_api_key: String, appKey: String, versionName: String, password: String) {
             Pgyer.pgyer._api_key = _api_key
             Pgyer.pgyer.appKey = appKey
             Pgyer.pgyer.versionName = versionName
+            Pgyer.pgyer.password = password
         }
 
-        fun install() {
+        fun install(context: Context) {
             GlobalScope.launch(Dispatchers.IO) {
                 val data = HttpClient.check() ?: return@launch
                 if (!data.buildHaveNewVersion) return@launch
                 GlobalScope.launch(Dispatchers.Main) {
-                    TipDialog(Pgyer.pgyer.context!!)
+                    TipDialog(context)
                             .setTitleRes(R.string.pyger_update)
-                            .setSubTitle("(${data!!.buildVersion!!})")
+                            .setSubTitle("(${data.buildVersion!!})")
                             .setContentStr(data.buildUpdateDescription!!)
                             .setCancelOnTouchOutside(false)
+                            .setHistoryListener {
+                                HistoryDialog(context, it)
+                                        .setOnBackListener {
+                                            install(context)
+                                        }
+                                        .show()
+                            }
                             .setConfirmListener {
-                                UpgradeDialog(Pgyer.pgyer.context, data.downloadURL!!, data.buildFileKey!!)
+                                UpgradeDialog(context, data.downloadURL!!, data.buildFileKey!!)
                                         .setConfirmListener {
-                                            Pgyer.pgyer.context.startActivity(
+                                            context.startActivity(
                                                     Intent(Intent.ACTION_VIEW)
                                                             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                                                             .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                                                             .setDataAndType(
                                                                     FileProvider.getUriForFile(
-                                                                            Pgyer.pgyer.context,
-                                                                            Pgyer.pgyer.context.packageName,
+                                                                            context,
+                                                                            context.packageName,
                                                                             it
                                                                     ), "application/vnd.android.package-archive"
                                                             )
@@ -63,6 +71,16 @@ class Install {
                 }
             }
 
+        }
+
+        fun history(context: Context) {
+            GlobalScope.launch(Dispatchers.IO) {
+                HttpClient.history(1)?.let {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        HistoryDialog(context, it).show()
+                    }
+                }
+            }
         }
     }
 }

@@ -51,7 +51,7 @@ class UpgradeDialog(context: Context, private val link: String, private val name
         }
 
         GlobalScope.launch(Dispatchers.IO) {
-            HttpClient.download(link, name, {
+            HttpClient.download(context, link, name, {
                 findViewById<View>(R.id.tvConfirm).isEnabled = false
                 lineProgress.setCurProgress(it.toInt(), 0)
                 tvProgress.text = String.format("%.2f%%", it)

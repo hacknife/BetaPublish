@@ -10,14 +10,14 @@ import android.content.Context
  * version: 1.0
  */
 class Install {
-
     companion object {
-
-        fun init(context: Context, _api_key: String, appKey: String, versionName: String) {
+        fun init(_api_key: String, appKey: String, versionName: String, password: String) {
         }
 
-        fun install() {
+        fun install(context: Context) {
         }
+
+        fun history(context: Context) {}
     }
 }
 

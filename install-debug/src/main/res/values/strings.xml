@@ -6,4 +6,6 @@
     <string name="pyger_new_version_downloading">新版本下载中</string>
     <string name="pyger_install">安装</string>
     <string name="pyger_download_fail">新版本下载失败</string>
+    <string name="pyger_history">历史版本</string>
+    <string name="pyger_back">返回</string>
 </resources>

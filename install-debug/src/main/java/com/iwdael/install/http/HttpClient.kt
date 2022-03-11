@@ -1,6 +1,9 @@
 package com.iwdael.install.http
 
+import android.content.Context
+import android.util.Log
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.iwdael.install.Pgyer.Companion.pgyer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -23,6 +26,7 @@ class HttpClient {
         fun check(): Version? {
             try {
                 val url = "https://www.pgyer.com/apiv2/app/check?_api_key=${pgyer._api_key}&appKey=${pgyer.appKey}&buildVersion=${pgyer.versionName}"
+                Log.v("dzq", "${url}")
                 val connection = URL(url).openConnection() as HttpURLConnection
                 connection.connectTimeout = 3 * 60 * 1000
                 connection.readTimeout = 3 * 60 * 1000
@@ -31,7 +35,7 @@ class HttpClient {
                     val inStream = connection.inputStream
                     val bytes = read(inStream)
                     val jsonStr = String(bytes)
-                    val json = Gson().fromJson(jsonStr, Response::class.java)
+                    val json = Gson().fromJson<Response<Version>>(jsonStr, object : TypeToken<Response<Version>>() {}.type)
                     return json?.data
                 }
             } catch (e: Exception) {
@@ -39,6 +43,33 @@ class HttpClient {
             }
             return null
         }
+
+
+        fun history(page: Int): List<Version>? {
+            try {
+                val url = "https://www.pgyer.com/apiv2/app/builds"
+                Log.v("dzq", "${url}")
+                val connection = URL(url).openConnection() as HttpURLConnection
+                connection.connectTimeout = 3 * 60 * 1000
+                connection.readTimeout = 3 * 60 * 1000
+                connection.requestMethod = "POST"
+                connection.connect()
+                val body = "_api_key=${pgyer._api_key}&appKey=${pgyer.appKey}&page=${page}"
+                val outputStream = connection.outputStream
+                outputStream.write(body.toByteArray(Charsets.UTF_8))
+                if (connection.responseCode == HttpURLConnection.HTTP_OK) {
+                    val inStream = connection.inputStream
+                    val bytes = read(inStream)
+                    val jsonStr = String(bytes)
+                    val json = Gson().fromJson<Response<Versions>>(jsonStr, object : TypeToken<Response<Versions>>() {}.type)
+                    return json?.data?.list
+                }
+            } catch (e: Exception) {
+                return null
+            }
+            return null
+        }
+
 
         fun read(inStream: InputStream): ByteArray {
             val outStream = ByteArrayOutputStream()
@@ -51,13 +82,13 @@ class HttpClient {
             return outStream.toByteArray()
         }
 
-        fun download(url: String, fileName: String, progress: ((Float) -> Unit), complete: ((File) -> Unit), error: (() -> Unit)) {
+        fun download(context: Context, url: String, fileName: String, progress: ((Float) -> Unit), complete: ((File) -> Unit), error: (() -> Unit)) {
             try {
                 val connection = URL(url).openConnection() as HttpURLConnection
                 connection.connectTimeout = 3 * 60 * 1000
                 connection.readTimeout = 3 * 60 * 1000
                 connection.requestMethod = "POST"
-                val file = File(pgyer.context!!.cacheDir, fileName)
+                val file = File(context.cacheDir, fileName)
                 file.deleteOnExit()
                 val outputStream: OutputStream = FileOutputStream(file)
                 if (connection.responseCode == HttpURLConnection.HTTP_OK) {
@@ -86,6 +117,7 @@ class HttpClient {
             }
 
         }
+
     }
 }
 

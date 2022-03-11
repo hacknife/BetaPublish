@@ -9,7 +9,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Install.init(this, "9be8e7b8347f764cec05b3aeb6838635", "8a1f0875bec2c943b63db071c672f763", "1.0.0")
-        Install.install()
+        Install.init("9be8e7b8347f764cec05b3aeb6838635", "c1aecf55db190fee734064c807b250b9", "1.0.0", "123456")
+        Install.install(this)
     }
 }

@@ -30,4 +30,5 @@ dependencies {
     implementation dependent.kotlinxCoroutinesAndroid
     implementation dependent.gson
     implementation dependent.coolprogress
+    implementation dependent.recyclerview
 }

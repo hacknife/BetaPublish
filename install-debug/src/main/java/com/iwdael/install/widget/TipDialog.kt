@@ -4,7 +4,12 @@ import android.content.Context
 import android.view.View
 import android.widget.TextView
 import com.iwdael.install.debug.R
+import com.iwdael.install.http.HttpClient
+import com.iwdael.install.http.Version
 import com.iwdael.install.widget.base.BaseDialog
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 /**
@@ -23,6 +28,13 @@ open class TipDialog(context: Context) : BaseDialog(context) {
     protected var confirmListener: (() -> Unit) = {}
     fun setConfirmListener(l: (() -> Unit)): TipDialog {
         confirmListener = l
+        return this
+    }
+
+    private var historyListener: ((List<Version>) -> Unit) = {}
+    fun setHistoryListener(l: ((List<Version>) -> Unit)): TipDialog {
+        historyListener = l
+        dismiss()
         return this
     }
 
@@ -143,6 +155,17 @@ open class TipDialog(context: Context) : BaseDialog(context) {
         findViewById<View>(R.id.tvConfirm).setOnClickListener {
             confirmListener.invoke()
             dismiss()
+        }
+        findViewById<View>(R.id.tvHistory).setOnClickListener {
+            GlobalScope.launch(Dispatchers.IO) {
+                HttpClient.history(1)?.let {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        historyListener.invoke(it)
+                        dismiss()
+                    }
+                }
+            }
+
         }
         findViewById<View>(R.id.tvConfirm).visibility =
                 if (confirmEnable) View.VISIBLE else View.GONE
